@@ -1,8 +1,9 @@
 #include "window.h"
 #include <iostream>
+#include <SDL_ttf.h>
 
 Window::Window(std::string title, int width, int height) : 
-	_title(title), _width(width), _height(height) // konstruktor z list¹ inicjalizuj¹c¹ (pisz¹ ¿e tak sprawniej sprawniej)
+	_title(title), _width(width), _height(height) // konstruktor z listÄ… inicjalizujÄ…cÄ… (piszÄ… Å¼e tak sprawniej sprawniej)
 {
 	if (!init())
 	{
@@ -10,22 +11,23 @@ Window::Window(std::string title, int width, int height) :
 	}
 }
 
-Window::~Window() //Zamykacz okna, rzeczy s¹ zamykane w kolejnoœci odwrotnej do inicjalizacji
+Window::~Window() //Zamykacz okna, rzeczy sÄ… zamykane w kolejnoÅ›ci odwrotnej do inicjalizacji
 {
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
+	TTF_Quit();
 	SDL_Quit();
 }
 
-bool Window::init() // metoda inicjalizuj¹ca okno z ustalonymi wratoœciami
+bool Window::init() // metoda inicjalizujÄ…ca okno z ustalonymi wratoÅ›ciami
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) 
 	{
-		std::cout << "Nie dzia³a Ci okno";
+		std::cout << "Nie dziaÅ‚a Ci okno";
 		return 0;
 	}
 
-	_window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, 0); //Tworzy okno (plansze) gdzie odbywaj¹ siê wszystkie eventy
+	_window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, 0); //Tworzy okno (plansze) gdzie odbywajÄ… siÄ™ wszystkie eventy
 
 
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED); // renderer jest odpowiedzialny za "rysowanie" rzeczy w oknie
@@ -33,13 +35,13 @@ bool Window::init() // metoda inicjalizuj¹ca okno z ustalonymi wratoœciami
 	return true;
 }
 
-bool Window::opened() // metoda zwracaj¹ca stan okna
+bool Window::opened() // metoda zwracajÄ…ca stan okna
 {
 	return _opened; 
 
 }
 
-void Window::buttonevent() //metoda która pozwala na wy³¹czenie okna "X"-em 
+void Window::buttonevent() //metoda ktÃ³ra pozwala na wyÅ‚Ä…czenie okna "X"-em 
 {
 	SDL_Event event;
 
@@ -62,7 +64,7 @@ void Window::buttonevent() //metoda która pozwala na wy³¹czenie okna "X"-em
 
 void Window::background(int red, int green, int blue) //metoda koloruje ekran wr RGB
 {
-	SDL_RenderPresent(_renderer); // RenderPresent musi byæ na koñcu definicji poniewa¿ prezentujemy efekt po wszystkich modyfikacjach tutaj jest na pocz¹tku ¿eby narysowaæ Paletke wywo³an¹ w mainie
+	SDL_RenderPresent(_renderer); // RenderPresent musi byÄ‡ na koÅ„cu definicji poniewaÅ¼ prezentujemy efekt po wszystkich modyfikacjach tutaj jest na poczÄ…tku Å¼eby narysowaÄ‡ Paletke wywoÅ‚anÄ… w mainie
 	SDL_SetRenderDrawColor(_renderer, red, green, blue, 0);
-	SDL_RenderClear(_renderer); // Potrzebne do wczeœniejszego wyczszczenia ekranu
+	SDL_RenderClear(_renderer); // Potrzebne do wczeÅ›niejszego wyczszczenia ekranu
 }
