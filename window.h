@@ -3,6 +3,7 @@
 #include <string>
 #include <SDL.h>
 
+
 class Window {
 public:
 	Window(std::string title, int width, int height);
@@ -11,7 +12,7 @@ public:
 	void buttonevent();
 	bool opened();
 	void background(int red, int green, int blue);
-
+	void Text();
 private:
 	bool init();
 
