@@ -9,9 +9,13 @@ public:
 
 	void draw();
 	void keyevent();
+	void movement();
+	int yer();
+	int _xrect, _yrect;
 
 private:
 	int _wrect, _hrect;
-	int _xrect, _yrect;
 	int _r, _g, _b, _a;
+	int _yoff = 0;
+	int _xoff = 0;
 };
