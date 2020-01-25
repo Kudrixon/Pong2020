@@ -2,10 +2,10 @@
 
 #include "window.h"
 
-class Rect :public Window
+class Rect
 {
 public:
-	Rect(Window &window, int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a);
+	Rect(int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a);
 
 	void draw();
 	void keyevent();
