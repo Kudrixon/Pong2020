@@ -1,7 +1,7 @@
 #include "Rect.h"
 #include "Ball.h"
-Rect::Rect(Window &window, int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a) :
-	Window(window), _wrect(wrect), _hrect(hrect), _xrect(xrect), _yrect(yrect), _r(r), _g(g), _b(b), _a(a)
+Rect::Rect(int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a) :
+	_wrect(wrect), _hrect(hrect), _xrect(xrect), _yrect(yrect), _r(r), _g(g), _b(b), _a(a)
 {
 
 }
@@ -14,8 +14,8 @@ void Rect::draw()
 	rect.h = _hrect;
 	rect.x = _xrect;
 	rect.y = _yrect;
-	SDL_SetRenderDrawColor(_renderer, 255, 0, 0, 0);
-	SDL_RenderFillRect(_renderer, &rect);
+	SDL_SetRenderDrawColor(Window::renderer, _r, _g, _b, _a);
+	SDL_RenderFillRect(Window::renderer, &rect);
 }
 
 void Rect::keyevent()
@@ -26,12 +26,26 @@ void Rect::keyevent()
 		if(event.type == SDL_KEYDOWN)
 		{
 			if (event.key.keysym.sym == SDLK_UP)
-			{
-				_yrect -= 10;
+			{	
+				if (_yrect <= 0)
+				{
+					//jak wyjezdza za ekran to nie rob nic
+				}
+				else 
+				{
+					_yrect -= 20;
+				}
 			}
 			else if (event.key.keysym.sym == SDLK_DOWN)
 			{
-				_yrect += 10;
+				if(_yrect >= 440)
+				{
+					//jak wyjezdza za ekran to nie rob nic
+				}
+				else 
+				{
+					_yrect += 20;
+				}
 			}
 		}
 
