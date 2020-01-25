@@ -2,19 +2,19 @@
 #include "Rect.h"
 
 
-Ball::Ball(Window& window, int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a) :
-	Window(window), _wrect(wrect), _hrect(hrect), _xrect(xrect), _yrect(yrect), _r(r), _g(g), _b(b), _a(a)
+Ball::Ball(int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a) :
+	_wrect(wrect), _hrect(hrect), _xrect(xrect), _yrect(yrect), _r(r), _g(g), _b(b), _a(a)
 {
 
 }
 void Ball::movement()
 {
 	// KIERUNEK Y
-	if (_yrect == 580 && _yoff == 0)
+	if (_yrect >= 580 && _yoff == 0)
 	{
 		_yoff = 1;
 	}
-	else if (_yrect == 0 && _yoff == 1)
+	else if (_yrect <= 0 && _yoff == 1)
 	{
 		_yoff = 0;
 	}
@@ -27,11 +27,11 @@ void Ball::movement()
 		_yrect-= _vel;
 	}
 	// KIERUNEK X
-	if (_xrect == 730 && _xoff == 0)
+	if (_xrect >= 730 && _xoff == 0)
 	{
 		_xoff = 1;
 	}
-	else if (_xrect == 50 && _xoff == 1)
+	else if (_xrect <= 50 && _xoff == 1)
 	{
 		_xoff = 0;
 	}
@@ -55,11 +55,11 @@ void Ball::draw()
 	ball .h = _hrect;
 	ball.x = _xrect;
 	ball.y = _yrect;
-	SDL_SetRenderDrawColor(_renderer, 255, 0, 0, 0);
-	SDL_RenderFillRect(_renderer, &ball);
+	SDL_SetRenderDrawColor(Window::renderer, 255, 0, 0, 0);
+	SDL_RenderFillRect(Window::renderer, &ball);
 }
 
-void Ball::speedup()
+void Ball::keyspeedup()
 {
 	SDL_Event  event;
 	if (SDL_PollEvent(&event))
@@ -78,6 +78,11 @@ void Ball::speedup()
 
 	}
 
+}
+
+void Ball::speedup()
+{
+	_vel++;
 }
 
 int Ball::ycollider()
