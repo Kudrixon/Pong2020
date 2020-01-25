@@ -12,7 +12,7 @@ public:
 	void buttonevent();
 	bool opened();
 	void background(int red, int green, int blue);
-	void Text();
+
 private:
 	bool init();
 
@@ -23,6 +23,6 @@ private:
 	int _height = 600;
 
 	bool _opened = true;
-protected:
-	SDL_Renderer* _renderer = 0;
+public:
+	static SDL_Renderer* renderer;
 };
