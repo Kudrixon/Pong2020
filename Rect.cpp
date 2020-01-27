@@ -1,5 +1,5 @@
 #include "Rect.h"
-#include "Ball.h"
+
 Rect::Rect(int wrect, int hrect, int xrect, int yrect, int r, int g, int b, int a) :
 	_wrect(wrect), _hrect(hrect), _xrect(xrect), _yrect(yrect), _r(r), _g(g), _b(b), _a(a)
 {
