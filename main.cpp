@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 	p1score = "0";
 	p2score = "0";
 
-	int aiFault = rand() % 20;//wyznacza omyslnosc przeciwnika
+	int aiFault = rand() % 1;//wyznacza omyslnosc przeciwnika
 	int counter = 0; //liczy ile razy sie odbiła piłka
 
 	int arr[180]; //tablica odpowiedzialna za sprawdzanie czy piłka zdrzeyła sie z rakietką
@@ -52,7 +52,14 @@ int main(int argc, char** argv)
 		}
 		else
 		{
-			rect2._yrect = (ball._yrect + 30);
+			if (ball.ycollider() <= 5 || ball.ycollider() >= 410)
+			{
+
+			}
+			else
+			{
+				rect2._yrect = (ball._yrect + 30);
+			}
 		}
 
 
